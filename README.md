@@ -2,4 +2,4 @@
 Figher Planes
 
 
-Collaborators for this project are cecil616(Tremaine Williams),  Monopopo and XI 
+Collaborators for this project are cecil616(Tremaine Williams),  Monopopo and XI(Darrin Williams) 
