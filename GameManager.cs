@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     {
         InvokeRepeating("CreateEnemyOne", 1, 2);
         InvokeRepeating("CreateEnemySphere", 3, 5);
+        InvokeRepeating("CreateEnemySinger", 6, 4);
     }
 
     // Update is called once per frame
@@ -30,4 +31,10 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(EnemySpherePrefab, new Vector3(Random.Range(-8f, -1f), 9.5f, 0), Quaternion.identity);
     }
+
+    void CreateEnemySinger()
+    {
+        Instantiate(EnemySingerPrefab, new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
+    }
+
 }
