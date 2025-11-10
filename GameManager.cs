@@ -1,40 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
 
+    public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
-    public GameObject EnemySpherePrefab;
+    public GameObject cloudPrefab;
+
+    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI Scoretext;
+
+    public float horizontalScreenSize;
+    public float verticalScreenSize;
+
+    public int score;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("CreateEnemyOne", 1, 2);
-        InvokeRepeating("CreateEnemySphere", 3, 5);
-        InvokeRepeating("CreateEnemySinger", 6, 4);
+        horizontalScreenSize = 10f;
+        verticalScreenSize = 6.5f;
+        score = 0;
+        Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        CreateSky();
+        InvokeRepeating("CreateEnemy", 1, 3);
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        
     }
 
-    void CreateEnemyOne()
+    void CreateEnemy()
     {
-        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
+        Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
 
-        void CreateEnemySphere()
+    void CreateSky()
     {
-        Instantiate(EnemySpherePrefab, new Vector3(Random.Range(-8f, -1f), 9.5f, 0), Quaternion.identity);
+        for (int i = 0; i < 30; i++)
+        {
+            Instantiate(cloudPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize), Random.Range(-verticalScreenSize, verticalScreenSize), 0), Quaternion.identity);
+        }
+        
     }
-
-    void CreateEnemySinger()
+    public void AddScore(int earnedScore)
     {
-        Instantiate(EnemySingerPrefab, new Vector3(Random.Range(-9f, 9f), 6.5f, 0), Quaternion.identity);
+        score = score + earnedScore;
+        Scoretext.text = "Score: " + score;
     }
 
+    public void ChangeLivesText (int currentLives)
+    {
+        livesText.text = "Lives: " + currentLives;
+    }
 }
