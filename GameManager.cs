@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
+    public GameObject coinPrefab;
 
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI Scoretext;
@@ -28,12 +29,18 @@ public class GameManager : MonoBehaviour
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         CreateSky();
         InvokeRepeating("CreateEnemy", 1, 3);
+        InvokeRepeating("CreateCoin", 1, 5);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void CreateCoin()
+    {
+        Instantiate(coinPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
 
     void CreateEnemy()
