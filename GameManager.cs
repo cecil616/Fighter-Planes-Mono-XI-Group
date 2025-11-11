@@ -10,10 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
-    public GameObject coinPrefab;
-
+    public GameObject HealthPickupPrefab;
     public TextMeshProUGUI livesText;
-    public TextMeshProUGUI Scoretext;
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
@@ -29,7 +27,7 @@ public class GameManager : MonoBehaviour
         Instantiate(playerPrefab, transform.position, Quaternion.identity);
         CreateSky();
         InvokeRepeating("CreateEnemy", 1, 3);
-        InvokeRepeating("CreateCoin", 1, 5);
+        InvokeRepeating("CreateHealthPickup", 1, 25);
     }
 
     // Update is called once per frame
@@ -38,14 +36,13 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void CreateCoin()
-    {
-        Instantiate(coinPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
-    }
-
     void CreateEnemy()
     {
         Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
+    }
+    void CreateHealthPickup()
+    {
+        Instantiate(HealthPickupPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
     }
 
     void CreateSky()
@@ -59,7 +56,6 @@ public class GameManager : MonoBehaviour
     public void AddScore(int earnedScore)
     {
         score = score + earnedScore;
-        Scoretext.text = "Score: " + score;
     }
 
     public void ChangeLivesText (int currentLives)
