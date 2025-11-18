@@ -45,20 +45,20 @@ public class PlayerController : MonoBehaviour
         //lives = lives - 1;
         //lives -= 1;
 
-        if (shieldType < 1)
+        if (shieldType > 1)
         {
-            lives--;
-            shieldPrefab.SetActive(false);
+            shieldType - LoseALife;
         }
-       
 
+            if (shieldPrefab != null)
+            {
+                shieldPrefab.SetActive(false);
+            }
         
+    
 
 
-
-
-        
-        
+        lives--;
         gameManager.ChangeLivesText(lives);
         if (lives == 0)
         {
@@ -129,16 +129,16 @@ public class PlayerController : MonoBehaviour
                     //Do I already have a shield?
                     //If yes: do nothing
                     //If not: activate the shield's visibility
-
-                    shieldType = 1;
-                    if (shieldPrefab != null)
+                    
+                    if (shieldType != null)
                     {
-                        
-                        shieldPrefab.SetActive(false);
+                        shieldType = 10;
+                        shieldPrefab.SetActive(true);
+                        StartCoroutine(Shieldup());
+
 
                     }
-                    shieldPrefab.SetActive(true);
-                    StartCoroutine(Shieldup());
+                   
                     gameManager.ManagePowerupText(4);
                     break;
             }
