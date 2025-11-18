@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject enemyOnePrefab;
     public GameObject cloudPrefab;
-    public GameObject healthPrefab;
 
     public TextMeshProUGUI livesText;
+    public TextMeshProUGUI Scoretext;
 
     public float horizontalScreenSize;
     public float verticalScreenSize;
@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("CreateEnemy", 1, 3);
     }
 
-
     // Update is called once per frame
     void Update()
     {
@@ -40,12 +39,6 @@ public class GameManager : MonoBehaviour
     void CreateEnemy()
     {
         Instantiate(enemyOnePrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
-    }
-
-    void createhealth()
-    {
-        Instantiate(healthPrefab, new Vector3(Random.Range(-horizontalScreenSize, horizontalScreenSize) * 0.9f, verticalScreenSize, 0), Quaternion.Euler(180, 0, 0));
-        Destroy(healthPrefab, 10f);
     }
 
     void CreateSky()
@@ -59,18 +52,11 @@ public class GameManager : MonoBehaviour
     public void AddScore(int earnedScore)
     {
         score = score + earnedScore;
+        Scoretext.text = "Score: " + score;
     }
 
     public void ChangeLivesText (int currentLives)
     {
         livesText.text = "Lives: " + currentLives;
-    }
-
-    public int currentLives = 3;
-
-    public void AddLife()
-    {
-        currentLives++;
-        Debug.Log("Lives: " + currentLives);
     }
 }
